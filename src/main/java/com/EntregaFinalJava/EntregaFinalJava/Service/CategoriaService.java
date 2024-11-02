@@ -32,11 +32,18 @@ public class CategoriaService {
                 .collect(Collectors.toList());
     }
 
+    // Obtener una categoría por id:
+    // -----------------------------
+
+    public CategoriaDTO getCategoryById(Long id) {
+        Categoria category = categoriaRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Cateroría con ID " + id + " no encontrada"));
+        CategoriaDTO categoryDTO = categoryMapper.toCategoriaDTO(category);
+        return categoryDTO;
+    }
+
     // Crear una categoría:
     // --------------------
-    public void altaCategoria(Categoria categoria) {
-        this.categoriaRepository.save(categoria);
-    }
 
     public CategoriaDTO createCategory(CategoriaDTO categoryDTO) {
         Categoria category = categoryMapper.toCategoria(categoryDTO);
@@ -65,13 +72,20 @@ public class CategoriaService {
         existingCategory.setNombre(toModifyCategory.getNombre());
         existingCategory.setDescripcion(toModifyCategory.getDescripcion());
         categoriaRepository.save(existingCategory);
-
         CategoriaDTO modifiedCategory = categoryMapper.toCategoriaDTO(toModifyCategory);
-
         return modifiedCategory;
     }
 
-    public List<Categoria> mostrarCategorias() {
-        return this.categoriaRepository.mostrarCategorias();
+    // Obtener una lista de categorías desde el main:
+    // ---------------------------------------------
+
+    public List<Categoria> getCategories() {
+        return this.categoriaRepository.getCategories();
+    }
+
+    // Crear una categoría desde el main:
+    // ---------------------------------
+    public void createCategory(Categoria categoria) {
+        this.categoriaRepository.save(categoria);
     }
 }

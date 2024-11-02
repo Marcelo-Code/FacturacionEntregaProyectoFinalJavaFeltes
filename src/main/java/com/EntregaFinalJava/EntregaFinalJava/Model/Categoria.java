@@ -38,5 +38,4 @@ public class Categoria {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
-
 }

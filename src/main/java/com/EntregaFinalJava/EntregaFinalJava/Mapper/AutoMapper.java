@@ -23,7 +23,6 @@ public class AutoMapper {
         if (car == null) {
             return null;
         }
-
         return AutoDTO.builder()
                 .id(car.getId())
                 .marca(car.getMarca())
@@ -47,12 +46,8 @@ public class AutoMapper {
         car.setAnio(carDto.getAnio());
         car.setPrecio(carDto.getPrecio());
         car.setCategoria(categoriaService.getCategoria(carDto.getCategoriaId()));
-
         Usuario usuario = usuarioService.getUserByID(carDto.getUsuarioId());
-
         car.setUsuario(usuario);
-
         return car;
     }
-
 }

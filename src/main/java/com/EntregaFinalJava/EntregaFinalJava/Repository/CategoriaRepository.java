@@ -11,7 +11,7 @@ import com.EntregaFinalJava.EntregaFinalJava.Model.Categoria;
 public interface CategoriaRepository extends JpaRepository<Categoria, Integer> {
 
     @Query("SELECT c FROM Categoria c")
-    List<Categoria> mostrarCategorias();
+    List<Categoria> getCategories();
 
     Optional<Categoria> findById(Long id);
 }

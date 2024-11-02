@@ -30,6 +30,7 @@ public class UsuarioController {
     // -----------------------
 
     @GetMapping("/getusuariobyid/{id}")
+
     public ResponseEntity<?> getUserById(@PathVariable Long id) {
         try {
             UsuarioDTO userDTO = userService.getUserById(id);
@@ -43,6 +44,7 @@ public class UsuarioController {
     // ------------------------------------
 
     @GetMapping(path = "/getallusuarios")
+
     public ResponseEntity<?> getAllUsuarios() {
         try {
             List<UsuarioDTO> usuarios = userService.getAllUsers();
@@ -56,15 +58,29 @@ public class UsuarioController {
     // ------------------------------
 
     @GetMapping(path = "/api/getallusuarios")
-    public ResponseEntity<?> gatAllUsersApi() {
+
+    public ResponseEntity<?> getAllUsersApi() {
 
         try {
             List<UsuarioDTO> usuarios = userService.gatAllUsersApi();
             return ResponseEntity.ok().body(new ApiResponseMsg("Usuarios encontrados: ", usuarios));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new ApiResponseMsg("Usuarios no encontrados: ", e.getMessage()));
+            return ResponseEntity.badRequest().body(new ApiResponseMsg("Error al buscar usuarios: ", e.getMessage()));
         }
+    }
 
+    // Obtener usuario por ID desde la API:
+    // ------------------------------------
+
+    @GetMapping(path = "/api/getusuariobyid/{id}")
+
+    public ResponseEntity<ApiResponseMsg> getUserByIdApi(@PathVariable Long id) {
+        try {
+            UsuarioApi userAPI = userService.getUserByIdApi(id);
+            return ResponseEntity.ok().body(new ApiResponseMsg("Usuario encontrado: ", userAPI));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ApiResponseMsg("Error al buscar usuario: ", e.getMessage()));
+        }
     }
 
     // --------------
@@ -74,6 +90,7 @@ public class UsuarioController {
     // --------------
 
     @PostMapping(path = "/createusuario")
+
     public ResponseEntity<ApiResponseMsg> createUser(@RequestBody UsuarioDTO userDTO) {
         try {
             UsuarioDTO createdUsuarioDTO = userService.createUser(userDTO);
@@ -87,6 +104,7 @@ public class UsuarioController {
     // --------------------------------------------
 
     @PostMapping(path = "/api/createusuario/{id}")
+
     public ResponseEntity<ApiResponseMsg> createUserApi(@PathVariable Long id) {
         try {
             UsuarioDTO userDTO = userService.createUserApi(id);
@@ -104,6 +122,7 @@ public class UsuarioController {
     // ------------------
 
     @PutMapping(path = "/modifyusuario/{id}")
+
     public ResponseEntity<ApiResponseMsg> updateUser(@PathVariable Long id, @RequestBody UsuarioDTO userDTO) {
         try {
             UsuarioDTO modifiedUser = userService.updateUser(id, userDTO);
@@ -121,6 +140,7 @@ public class UsuarioController {
     // -----------------
 
     @DeleteMapping(path = "/deleteusuario/{id}")
+
     public ResponseEntity<ApiResponseMsg> deteleUser(@PathVariable Long id) {
         try {
             UsuarioDTO deletedUser = userService.deleteUser(id);
@@ -135,6 +155,7 @@ public class UsuarioController {
     // ---------------------------
 
     @DeleteMapping(path = "/api/deleteusuario/{id}")
+
     public ResponseEntity<ApiResponseMsg> deleteApiUser(@PathVariable Long id) {
         try {
             UsuarioApi deletedUser = userService.deleteApiUser(id);
@@ -144,5 +165,4 @@ public class UsuarioController {
                     .body(new ApiResponseMsg("Error al tratar de eliminar el usuario: ", e.getMessage()));
         }
     }
-
 }

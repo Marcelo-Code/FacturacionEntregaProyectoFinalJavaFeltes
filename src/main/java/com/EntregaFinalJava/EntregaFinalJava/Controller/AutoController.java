@@ -43,7 +43,6 @@ public class AutoController {
     public ResponseEntity<ApiResponseMsg> getAllCars() {
         try {
             List<Auto> autos = autoService.getAllCars();
-
             List<AutoDTO> autosDTO = autos.stream()
                     .map(autoMapper::toAutoDTO)
                     .collect(Collectors.toList());

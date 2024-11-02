@@ -60,6 +60,7 @@ public class SegundaPreEntregaJavaApplication implements CommandLineRunner {
 		Usuario u10 = new Usuario("Lucia Jimenez", "luciaJimenez@outlook.com", "01234567");
 
 		// Damos de alta usuarios
+
 		this.usuarioService.createUser(u1);
 		this.usuarioService.createUser(u2);
 		this.usuarioService.createUser(u3);
@@ -73,16 +74,16 @@ public class SegundaPreEntregaJavaApplication implements CommandLineRunner {
 
 		// Damos de alta categorías en SQL
 
-		this.categoriaService.altaCategoria(c1);
-		this.categoriaService.altaCategoria(c2);
-		this.categoriaService.altaCategoria(c3);
-		this.categoriaService.altaCategoria(c4);
-		this.categoriaService.altaCategoria(c5);
-		this.categoriaService.altaCategoria(c6);
-		this.categoriaService.altaCategoria(c7);
-		this.categoriaService.altaCategoria(c8);
-		this.categoriaService.altaCategoria(c9);
-		this.categoriaService.altaCategoria(c10);
+		this.categoriaService.createCategory(c1);
+		this.categoriaService.createCategory(c2);
+		this.categoriaService.createCategory(c3);
+		this.categoriaService.createCategory(c4);
+		this.categoriaService.createCategory(c5);
+		this.categoriaService.createCategory(c6);
+		this.categoriaService.createCategory(c7);
+		this.categoriaService.createCategory(c8);
+		this.categoriaService.createCategory(c9);
+		this.categoriaService.createCategory(c10);
 
 		// Definimos autos
 
@@ -119,35 +120,35 @@ public class SegundaPreEntregaJavaApplication implements CommandLineRunner {
 
 		// Damos de alta autos en SQL
 
-		this.autoService.altaAuto(a1);
-		this.autoService.altaAuto(a2);
-		this.autoService.altaAuto(a3);
-		this.autoService.altaAuto(a4);
-		this.autoService.altaAuto(a5);
-		this.autoService.altaAuto(a6);
-		this.autoService.altaAuto(a7);
-		this.autoService.altaAuto(a8);
-		this.autoService.altaAuto(a9);
-		this.autoService.altaAuto(a10);
-		this.autoService.altaAuto(a11);
-		this.autoService.altaAuto(a12);
-		this.autoService.altaAuto(a13);
-		this.autoService.altaAuto(a14);
-		this.autoService.altaAuto(a15);
-		this.autoService.altaAuto(a16);
-		this.autoService.altaAuto(a17);
-		this.autoService.altaAuto(a18);
-		this.autoService.altaAuto(a19);
-		this.autoService.altaAuto(a20);
-		this.autoService.altaAuto(a21);
-		this.autoService.altaAuto(a22);
-		this.autoService.altaAuto(a23);
-		this.autoService.altaAuto(a24);
-		this.autoService.altaAuto(a25);
-		this.autoService.altaAuto(a26);
-		this.autoService.altaAuto(a27);
-		this.autoService.altaAuto(a28);
-		this.autoService.altaAuto(a29);
-		this.autoService.altaAuto(a30);
+		this.autoService.createCar(a1);
+		this.autoService.createCar(a2);
+		this.autoService.createCar(a3);
+		this.autoService.createCar(a4);
+		this.autoService.createCar(a5);
+		this.autoService.createCar(a6);
+		this.autoService.createCar(a7);
+		this.autoService.createCar(a8);
+		this.autoService.createCar(a9);
+		this.autoService.createCar(a10);
+		this.autoService.createCar(a11);
+		this.autoService.createCar(a12);
+		this.autoService.createCar(a13);
+		this.autoService.createCar(a14);
+		this.autoService.createCar(a15);
+		this.autoService.createCar(a16);
+		this.autoService.createCar(a17);
+		this.autoService.createCar(a18);
+		this.autoService.createCar(a19);
+		this.autoService.createCar(a20);
+		this.autoService.createCar(a21);
+		this.autoService.createCar(a22);
+		this.autoService.createCar(a23);
+		this.autoService.createCar(a24);
+		this.autoService.createCar(a25);
+		this.autoService.createCar(a26);
+		this.autoService.createCar(a27);
+		this.autoService.createCar(a28);
+		this.autoService.createCar(a29);
+		this.autoService.createCar(a30);
 	}
 }

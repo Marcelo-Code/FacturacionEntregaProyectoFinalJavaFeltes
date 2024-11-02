@@ -55,13 +55,6 @@ public class AutoService {
         return carDTOs;
     }
 
-    // Obtener lista de autos en el main:
-    // ----------------------------------
-
-    public List<Auto> getCarsMain() {
-        return this.autosRepository.getCarsMain();
-    }
-
     // Obtener lista de autos de año mayor que:
     // ----------------------------------------
 
@@ -84,12 +77,8 @@ public class AutoService {
         return carDTOs;
     }
 
-    public void altaAuto(Auto auto) {
-        this.autosRepository.save(auto);
-    }
-
-    // Eliminar un un auto:
-    // --------------------
+    // Eliminar un auto:
+    // -----------------
 
     public AutoDTO deleteCar(int id) {
         Auto carToDelete = autosRepository.findById(id)
@@ -119,19 +108,28 @@ public class AutoService {
         existingCar.setModelo(toModifyCar.getModelo());
         existingCar.setAnio(toModifyCar.getAnio());
         existingCar.setPrecio(toModifyCar.getPrecio());
-
         Long newCategoryId = toModifyCar.getCategoriaId();
         Categoria newCategory = categoriaService.getCategoria(newCategoryId);
         existingCar.setCategoria(newCategory);
-
         Long newUserId = toModifyCar.getUsuarioId();
         Usuario newUser = userService.getUserByID(newUserId);
         existingCar.setUsuario(newUser);
         autosRepository.save(existingCar);
-
         AutoDTO modifiedCar = carMapper.toAutoDTO(existingCar);
-
         return modifiedCar;
     }
 
+    // Obtener lista de autos desde el main:
+    // -------------------------------------
+
+    public List<Auto> getCars() {
+        return this.autosRepository.getCars();
+    }
+
+    // Crear una auto desde el main:
+    // -----------------------------
+
+    public void createCar(Auto auto) {
+        this.autosRepository.save(auto);
+    }
 }

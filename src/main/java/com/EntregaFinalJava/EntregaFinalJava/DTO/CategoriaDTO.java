@@ -23,5 +23,4 @@ public class CategoriaDTO {
         this.descripcion = descripcion;
         this.autos = autos;
     }
-
 }

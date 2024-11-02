@@ -11,7 +11,6 @@ public class UsuarioApiMapper {
         if (usuarioApi == null) {
             return null;
         }
-
         return UsuarioDTO.builder()
                 .id(usuarioApi.getId())
                 .nombre(usuarioApi.getName())

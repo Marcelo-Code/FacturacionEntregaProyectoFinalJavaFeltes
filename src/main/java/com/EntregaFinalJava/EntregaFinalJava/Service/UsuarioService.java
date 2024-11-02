@@ -48,6 +48,19 @@ public class UsuarioService {
                 .collect(Collectors.toList());
     }
 
+    // Obtener usuario por ID desde la API:
+    // ------------------------------------
+
+    public UsuarioApi getUserByIdApi(Long id) {
+        String url = BASE_URL + "/" + id;
+        try {
+            UsuarioApi userApi = restTemplate.getForObject(url, UsuarioApi.class);
+            return userApi;
+        } catch (Exception e) {
+            throw new EntityNotFoundException("Usuario con ID " + id + " no encontrado");
+        }
+    }
+
     // Obtener usuario por Id:
     // -----------------------
 
@@ -58,11 +71,13 @@ public class UsuarioService {
         return userDTO;
     }
 
+    // Obtener usuario pot Id:
+    // -----------------------
+
     public Usuario getUserByID(Long id) {
         Usuario user = userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario con ID " + id + " no encontrado"));
         return user;
-
     }
 
     // Obtener lista de todos los usuarios:
@@ -83,14 +98,6 @@ public class UsuarioService {
         return userMapper.toUsuarioDTO(savedUsuario);
     }
 
-    // Crear usuario desde el main:
-    // ----------------------------
-
-    public Usuario createUser(Usuario usuario) {
-        Usuario savedUsuario = userRepository.save(usuario);
-        return savedUsuario;
-    }
-
     // Modificar usuario:
     // ------------------
 
@@ -102,9 +109,7 @@ public class UsuarioService {
         existingUser.setEmail(toModifyUser.getEmail());
         existingUser.setTelefono(toModifyUser.getTelefono());
         userRepository.save(existingUser);
-
         UsuarioDTO modifiedUser = userMapper.toUsuarioDTO(existingUser);
-
         return modifiedUser;
     }
 
@@ -128,15 +133,13 @@ public class UsuarioService {
             UsuarioApi userToDelete = restTemplate.getForObject(url, UsuarioApi.class);
             restTemplate.delete(url);
             return userToDelete;
-
         } catch (HttpClientErrorException.NotFound e) {
             throw new EntityNotFoundException("Usuario con ID " + id + " no encontrado");
         }
-
     }
 
-    // Crear un usuario desde un usuario de la API:
-    // --------------------------------------------
+    // Asignar un usuario de la API a la lista de usuarios:
+    // ----------------------------------------------------
 
     public UsuarioDTO createUserApi(Long id) {
         String url = BASE_URL + "/" + id;
@@ -150,4 +153,10 @@ public class UsuarioService {
         }
     }
 
+    // Crear usuario desde el main:
+    // ----------------------------
+
+    public void createUser(Usuario usuario) {
+        this.userRepository.save(usuario);
+    }
 }

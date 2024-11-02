@@ -16,7 +16,7 @@ public interface AutosRepository extends JpaRepository<Auto, Integer> {
     List<Auto> getCarsByBrand(@Param("marca") String marca);
 
     @Query("SELECT a FROM Auto a JOIN a.categoria c")
-    List<Auto> getCarsMain();
+    List<Auto> getCars();
 
     @Query("SELECT a from Auto a WHERE a.anio > :anio")
     List<Auto> getCarsByYearGreaterThan(@Param("anio") int anio);
@@ -29,5 +29,4 @@ public interface AutosRepository extends JpaRepository<Auto, Integer> {
     void eliminarAutoPorId(@Param("id") int id);
 
     Optional<Auto> findById(int id);
-
 }

@@ -20,11 +20,9 @@ public class CategoriaMapper {
         if (category == null) {
             return null;
         }
-
         List<AutoDTO> carDTOs = category.getAutos().stream()
                 .map(carMapper::toAutoDTO)
                 .collect(Collectors.toList());
-
         return CategoriaDTO.builder()
                 .id(category.getId())
                 .nombre(category.getNombre())
@@ -37,19 +35,13 @@ public class CategoriaMapper {
         if (categoryDTO == null) {
             return null;
         }
-
         Categoria category = new Categoria();
         category.setNombre(categoryDTO.getNombre());
         category.setDescripcion(categoryDTO.getDescripcion());
-
         List<AutoDTO> carDTOs = categoryDTO.getAutos() != null ? categoryDTO.getAutos() : Collections.emptyList();
-
         List<Auto> convertedCategories = carDTOs.stream().map(carMapper::toAuto)
                 .collect(Collectors.toList());
-
         category.setAutos(convertedCategories);
-
         return category;
     }
-
 }

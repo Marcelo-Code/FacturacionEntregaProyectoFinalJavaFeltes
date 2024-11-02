@@ -33,12 +33,24 @@ public class CategoriaController {
     // ------------------------------------------
 
     @GetMapping("/getallcategorias")
+
     public ResponseEntity<ApiResponseMsg> getAllCategories() {
         try {
             List<CategoriaDTO> categoryDTOs = categoriaService.getAllCategories();
             return ResponseEntity.ok().body(new ApiResponseMsg("Categorías encontradas: ", categoryDTOs));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ApiResponseMsg("Error al buscar categorías: ", e.getMessage()));
+        }
+    }
+
+    @GetMapping("/getcategoriabyid/{id}")
+
+    public ResponseEntity<ApiResponseMsg> getCategoryById(@PathVariable Long id) {
+        try {
+            CategoriaDTO categoryDTO = categoriaService.getCategoryById((id));
+            return ResponseEntity.ok().body(new ApiResponseMsg("Categoría encontrada", categoryDTO));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ApiResponseMsg("Error al buscar categoría", e.getMessage()));
         }
     }
 
@@ -49,6 +61,7 @@ public class CategoriaController {
     // --------------------
 
     @PostMapping("/createcategoria")
+
     public ResponseEntity<ApiResponseMsg> createCategory(@RequestBody CategoriaDTO categoryDTO) {
         try {
             CategoriaDTO createdCategoryDTO = categoriaService.createCategory(categoryDTO);
@@ -65,6 +78,7 @@ public class CategoriaController {
     // -----------------------
 
     @DeleteMapping("/deletecategoria/{id}")
+
     public ResponseEntity<ApiResponseMsg> deleteCategory(@PathVariable Long id) {
         try {
             CategoriaDTO deletedCategory = categoriaService.deleteCategory(id);
@@ -82,6 +96,7 @@ public class CategoriaController {
     // ------------------------
 
     @PutMapping("/modifycategoria/{id}")
+
     public ResponseEntity<ApiResponseMsg> updateCategory(@PathVariable Long id, @RequestBody CategoriaDTO categoryDTO) {
         try {
             CategoriaDTO modifiedCategory = categoriaService.updateCategory(id, categoryDTO);

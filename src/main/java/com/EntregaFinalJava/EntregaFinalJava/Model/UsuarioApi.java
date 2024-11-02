@@ -15,8 +15,8 @@ public class UsuarioApi {
     private String email;
     private String phone;
 
+    // Constructor por defecto
     public UsuarioApi() {
-
     }
 
     public UsuarioApi(Long id, String name, String email, String phone) {

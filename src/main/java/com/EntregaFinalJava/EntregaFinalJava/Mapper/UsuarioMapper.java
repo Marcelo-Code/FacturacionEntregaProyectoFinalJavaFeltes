@@ -20,11 +20,9 @@ public class UsuarioMapper {
         if (user == null) {
             return null;
         }
-
         List<AutoDTO> autoDTOs = user.getAutos().stream()
                 .map(carMapper::toAutoDTO)
                 .collect(Collectors.toList());
-
         return UsuarioDTO.builder()
                 .id(user.getId())
                 .nombre(user.getNombre())
@@ -38,18 +36,14 @@ public class UsuarioMapper {
         if (userDTO == null) {
             return null;
         }
-
         Usuario user = new Usuario();
         user.setNombre(userDTO.getNombre());
         user.setEmail(userDTO.getEmail());
         user.setTelefono(userDTO.getTelefono());
-
         List<AutoDTO> autoDTOs = userDTO.getAutos() != null ? userDTO.getAutos() : Collections.emptyList();
-
         List<Auto> convertedAutos = autoDTOs.stream().map(carMapper::toAuto)
                 .collect(Collectors.toList());
         user.setAutos(convertedAutos);
-
         return user;
     }
 }

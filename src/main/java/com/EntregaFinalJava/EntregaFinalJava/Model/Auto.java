@@ -70,5 +70,4 @@ public class Auto {
     public Long getUsuarioId() {
         return this.usuario.getId();
     }
-
 }
