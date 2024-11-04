@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.EntregaFinalJava.EntregaFinalJava.DTO.CategoriaDTO;
 import com.EntregaFinalJava.EntregaFinalJava.Mapper.CategoriaMapper;
 import com.EntregaFinalJava.EntregaFinalJava.Model.Categoria;
+import com.EntregaFinalJava.EntregaFinalJava.Repository.AutosRepository;
 import com.EntregaFinalJava.EntregaFinalJava.Repository.CategoriaRepository;
 import jakarta.persistence.EntityNotFoundException;
 
@@ -18,6 +19,9 @@ public class CategoriaService {
 
     @Autowired
     private CategoriaMapper categoryMapper;
+
+    @Autowired
+    private AutosRepository carRepository;
 
     public Categoria getCategoria(Long id) {
         return categoriaRepository.findById(id).orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
@@ -57,6 +61,10 @@ public class CategoriaService {
     public CategoriaDTO deleteCategory(Long id) {
         Categoria categoryToDelete = categoriaRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Categoría con ID " + id + " no encontrada"));
+        Categoria emptyCategory = new Categoria();
+        categoriaRepository.save(emptyCategory);
+        categoryToDelete.getAutos().forEach(auto -> auto.setCategoria(emptyCategory));
+        carRepository.saveAll(categoryToDelete.getAutos());
         categoriaRepository.delete(categoryToDelete);
         CategoriaDTO deletedCategory = categoryMapper.toCategoriaDTO(categoryToDelete);
         return deletedCategory;
@@ -72,7 +80,7 @@ public class CategoriaService {
         existingCategory.setNombre(toModifyCategory.getNombre());
         existingCategory.setDescripcion(toModifyCategory.getDescripcion());
         categoriaRepository.save(existingCategory);
-        CategoriaDTO modifiedCategory = categoryMapper.toCategoriaDTO(toModifyCategory);
+        CategoriaDTO modifiedCategory = categoryMapper.toCategoriaDTO(existingCategory);
         return modifiedCategory;
     }
 

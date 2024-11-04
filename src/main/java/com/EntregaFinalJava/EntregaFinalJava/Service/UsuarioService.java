@@ -12,6 +12,7 @@ import com.EntregaFinalJava.EntregaFinalJava.Mapper.UsuarioApiMapper;
 import com.EntregaFinalJava.EntregaFinalJava.Mapper.UsuarioMapper;
 import com.EntregaFinalJava.EntregaFinalJava.Model.Usuario;
 import com.EntregaFinalJava.EntregaFinalJava.Model.UsuarioApi;
+import com.EntregaFinalJava.EntregaFinalJava.Repository.AutosRepository;
 import com.EntregaFinalJava.EntregaFinalJava.Repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.Arrays;
@@ -37,6 +38,9 @@ public class UsuarioService {
     @Autowired
     @Lazy
     AutoMapper carMapper;
+
+    @Autowired
+    AutosRepository carRepository;
 
     // Obtener todos los usuarios desde la API:
     // ----------------------------------------
@@ -119,6 +123,10 @@ public class UsuarioService {
     public UsuarioDTO deleteUser(Long id) {
         Usuario userToDelete = userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario con ID " + id + " no encontrado"));
+        Usuario emptyUser = new Usuario();
+        userRepository.save(emptyUser);
+        userToDelete.getAutos().forEach(auto -> auto.setUsuario(emptyUser));
+        carRepository.saveAll(userToDelete.getAutos());
         userRepository.deleteById(id);
         UsuarioDTO deletedUser = userMapper.toUsuarioDTO(userToDelete);
         return deletedUser;

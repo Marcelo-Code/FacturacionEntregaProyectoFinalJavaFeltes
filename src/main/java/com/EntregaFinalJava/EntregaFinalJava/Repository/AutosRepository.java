@@ -12,7 +12,7 @@ import com.EntregaFinalJava.EntregaFinalJava.Model.Auto;
 @Repository
 public interface AutosRepository extends JpaRepository<Auto, Integer> {
 
-    @Query("SELECT a FROM Auto a WHERE a.marca = :marca")
+    @Query("SELECT a FROM Auto a WHERE LOWER(a.marca) = LOWER(:marca)")
     List<Auto> getCarsByBrand(@Param("marca") String marca);
 
     @Query("SELECT a FROM Auto a JOIN a.categoria c")

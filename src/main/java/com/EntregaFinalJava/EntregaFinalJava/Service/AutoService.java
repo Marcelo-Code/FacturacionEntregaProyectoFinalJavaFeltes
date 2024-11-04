@@ -48,7 +48,7 @@ public class AutoService {
     // -------------------------------------
 
     public List<AutoDTO> getCarsByBrand(String brand) {
-        List<Auto> cars = autosRepository.getCarsByBrand(brand);
+        List<Auto> cars = autosRepository.getCarsByBrand(brand.toLowerCase());
         List<AutoDTO> carDTOs = cars.stream()
                 .map(carMapper::toAutoDTO)
                 .collect(Collectors.toList());

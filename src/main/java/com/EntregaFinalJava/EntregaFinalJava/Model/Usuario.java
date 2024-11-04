@@ -24,7 +24,7 @@ public class Usuario {
     private String email;
     private String telefono;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = false)
     private List<Auto> autos;
 
     public Usuario() {
